@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --index: calc(1vw + 1vh);
+    --transition: 1.5s cubic-bezier(.05, .5, 0, 1);
+    --bg-color: #1a1a1a;
+    --bg-pattern-color1: #252525;
+    --bg-pattern-color2: #2f2f2f;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+}
+
+.layers {
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.layers__container {
+    height: 100vh;
+    min-height: 500px;
+    transform-style: preserve-3d;
+    transform: rotateX(var(--move-y)) rotateY(var(--move-x));
+    will-change: transform;
+    transition: transform var(--transition);
+    position: relative;
+}
+
+.layers__item {
+    position: absolute;
+    inset: -5vw;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.layer-1 {
+    transform: translateZ(-55px) scale(1.06);
+    background-color: var(--bg-color);
+    background-image: 
+        linear-gradient(30deg, var(--bg-pattern-color1) 12%, transparent 12.5%, transparent 87%, var(--bg-pattern-color1) 87.5%, var(--bg-pattern-color1)),
+        linear-gradient(150deg, var(--bg-pattern-color1) 12%, transparent 12.5%, transparent 87%, var(--bg-pattern-color1) 87.5%, var(--bg-pattern-color1)),
+        linear-gradient(30deg, var(--bg-pattern-color1) 12%, transparent 12.5%, transparent 87%, var(--bg-pattern-color1) 87.5%, var(--bg-pattern-color1)),
+        linear-gradient(150deg, var(--bg-pattern-color1) 12%, transparent 12.5%, transparent 87%, var(--bg-pattern-color1) 87.5%, var(--bg-pattern-color1)),
+        linear-gradient(60deg, var(--bg-pattern-color2) 25%, transparent 25.5%, transparent 75%, var(--bg-pattern-color2) 75%, var(--bg-pattern-color2)),
+        linear-gradient(60deg, var(--bg-pattern-color2) 25%, transparent 25.5%, transparent 75%, var(--bg-pattern-color2) 75%, var(--bg-pattern-color2));
+    background-size: 80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+    animation: move 10s linear infinite;
+}
+
+@keyframes move {
+    0% {
+        background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+    }
+    100% {
+        background-position: 80px 140px, 80px 140px, 120px 210px, 120px 210px, 80px 140px, 120px 210px;
+    }
+}
+
+.layer-3 {
+    transform: translateZ(180px) scale(.8);
+    z-index: 2;
+}
+
+.layer-5 {
+    transform: translateZ(300px) scale(.5);
+    pointer-events: none;
+}
+
+.layer-6 {
+    transform: translateZ(300px) scale();
+    opacity: 60%;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    font-size: calc(var(--index) * 2.9);
+    text-align: center;
+    text-transform: none;
+    letter-spacing: calc(var(--index) * -.15);
+    line-height: 1.35em;
+    margin-top: calc(var(--index) * 5.5);
+}
+
+.hero-content__p {
+    text-transform: none;
+    font-family: monospace;
+    letter-spacing: normal;
+    font-size: calc(var(--index) * .73);
+    line-height: 3;
+    z-index: 10;
+}
+
+.explore-button {
+    margin-top: calc(var(--index) * 2);
+    padding: calc(var(--index) * 0.7) calc(var(--index) * 1.25);
+    font-size: calc(var(--index) * 0.8);
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #fff;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.explore-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.explore-button:active {
+    transform: scale(0.95);
+}
